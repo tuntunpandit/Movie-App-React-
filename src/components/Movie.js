@@ -4,9 +4,7 @@ const Movie = ({
   titleOriginal,
   description,
   image,
-  year,
   rating,
-  release,
 }) => {
   return (
     <div className="movie">

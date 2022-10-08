@@ -11,20 +11,61 @@ const options = {
 };
 const App = () => {
   const [movies, setMovies] = useState([]);
-  useEffect(() => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const getMovies = () => {
     fetch(MOVIE_API, options)
       .then((res) => res.json())
-      .then((data) => {
-        console.log(data.results);
-        setMovies(data.results);
-      });
+      .then(
+        (data) => {
+          console.log(data.results);
+          setIsLoaded(true);
+          setMovies(data.results);
+        },
+        (error) => {
+          setIsLoaded(true);
+          setError(error);
+        }
+      );
+  };
+  useEffect(() => {
+    getMovies();
   }, []);
 
+  const filterMovie = (e) => {
+    e.preventDefault();
+    if (searchTerm) {
+      const filteredMovies = movies.filter((movie) =>
+        movie.titleOriginal.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setMovies(filteredMovies);
+    } else {
+      setMovies(movies);
+    }
+  };
+
   return (
-    <div className="movie-container">
-      {movies.length && movies.map((movie) => (
-        <Movie key={movie._id} {...movie} />
-      ))}
+    <div className="container">
+      <header>
+        <form onSubmit={filterMovie}>
+          <input
+            type="text"
+            placeholder="Enter movie name..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </form>
+      </header>
+      <div className="movie-container">
+        {error
+          ? <div className="error"><span>Error : </span>{error.message}</div>
+          : !isLoaded
+          ? <div className="loading">Loading ...</div>
+          : movies.map((movie) => <Movie key={movie._id} {...movie} />)
+        }
+      </div>
     </div>
   );
 };
