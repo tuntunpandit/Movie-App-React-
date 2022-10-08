@@ -21,7 +21,7 @@ const App = () => {
   }, []);
 
   return (
-    <div>
+    <div className="movie-container">
       {movies.length && movies.map((movie) => (
         <Movie key={movie._id} {...movie} />
       ))}

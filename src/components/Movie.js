@@ -14,10 +14,9 @@ const Movie = ({
         <img src={image} alt={titleOriginal} />
       </div>
       <div className="movie-info">
-        <p>{titleOriginal}</p>
-        <span>{rating}</span>
+        <p title={titleOriginal}>{titleOriginal}</p>
+        <span className="rating">{rating}</span>
       </div>
-
     </div>
   );
 };
