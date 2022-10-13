@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;800&display=swap");
 
+:root {
+  --main-color: #2e763e;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -7,21 +11,34 @@
 }
 
 body {
-  margin: 0;
-  padding: 0;
   font-family: "Poppins", sans-serif;
   background-color: #1f2461;
 }
 
+.main-bg {
+  background-image: linear-gradient(-4deg, #979797 51.8%, #f7ce68 52%);
+}
+
+.main-btn {
+  background: var(--main-color);
+}
+
 .container header {
   display: flex;
-  justify-content: end;
+  justify-content: space-between;
   align-items: center;
   height: 60px;
   padding: 0.5rem 2rem;
   background-color: #373b69;
 }
-
+.header .logo {
+  color: #e7e7e7;
+  font-weight: 600;
+  font-size: 25px;
+}
+.logo .logo-txt {
+  color: #8acb51;
+}
 .container header input {
   padding: 0.5rem;
   /* font-size: 16px; */
@@ -116,7 +133,8 @@ body {
   transform: translateY(0%);
 }
 
-.error, .loading {
+.error,
+.loading {
   color: #fff;
   opacity: 0.8;
   height: 50vh;
@@ -128,4 +146,31 @@ body {
 .error span {
   color: red;
   margin-right: 10px;
+}
+
+.login-txt {
+  position: relative;
+  color: var(--main-color);
+}
+.login-txt:after {
+  position: absolute;
+  content: "";
+  height: 3px;
+  bottom: -4px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: var(--main-color);
+  transition: 0.5s;
+}
+
+.registration .create-account {
+  color: #3a47a7;
+  cursor: pointer;
+}
+@media only screen and (max-width: 450px) {
+  .width-100 {
+    width: 100%;
+  }
 }
